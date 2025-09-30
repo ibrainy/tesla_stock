@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polygon.io HTTP API 测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-section {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+        .error {
+            border-left-color: #f44336;
+        }
+        .success {
+            border-left-color: #4CAF50;
+        }
+        pre {
+            background: #333;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            color: #4CAF50;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #555;
+            background: #333;
+            color: #fff;
+            border-radius: 4px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Polygon.io HTTP API 测试</h1>
+    
+    <div class="test-section">
+        <h3>API Key配置</h3>
+        <p>当前API Key: <span id="currentApiKey"></span></p>
+    </div>
+
+    <div class="test-section">
+        <h3>测试单个股票</h3>
+        <input type="text" id="symbolInput" placeholder="输入股票代码，如 AAPL" value="AAPL">
+        <button onclick="testSingleStock()">测试</button>
+        <div id="singleResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>测试所有配置的股票</h3>
+        <button onclick="testAllStocks()">测试全部</button>
+        <div id="allResults"></div>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        // 显示当前API Key
+        document.getElementById('currentApiKey').textContent = 
+            POLYGON_CONFIG.apiKey ? POLYGON_CONFIG.apiKey.substring(0, 20) + '...' : '未配置';
+
+        async function testSingleStock() {
+            const symbol = document.getElementById('symbolInput').value.trim();
+            const resultDiv = document.getElementById('singleResult');
+            
+            if (!symbol) {
+                resultDiv.innerHTML = '<p style="color: #f44336;">请输入股票代码</p>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<p>正在请求...</p>';
+
+            try {
+                const url = `${POLYGON_CONFIG.baseUrl}/v2/aggs/ticker/${symbol}/prev?adjusted=true&apikey=${POLYGON_CONFIG.apiKey}`;
+                console.log('请求URL:', url);
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                console.log('响应数据:', data);
+
+                if (data.status === 'OK') {
+                    resultDiv.innerHTML = `
+                        <p style="color: #4CAF50;">✅ 请求成功</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <p style="color: #f44336;">❌ API返回错误</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <p style="color: #f44336;">❌ 请求失败: ${error.message}</p>
+                `;
+            }
+        }
+
+        async function testAllStocks() {
+            const resultDiv = document.getElementById('allResults');
+            resultDiv.innerHTML = '<p>正在测试所有股票...</p>';
+
+            const results = [];
+
+            for (const stock of POLYGON_CONFIG.stocks) {
+                try {
+                    const url = `${POLYGON_CONFIG.baseUrl}/v2/aggs/ticker/${stock.symbol}/prev?adjusted=true&apikey=${POLYGON_CONFIG.apiKey}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    if (data.status === 'OK' && data.results && data.results.length > 0) {
+                        const result = data.results[0];
+                        results.push(`✅ ${stock.name} (${stock.symbol}): $${result.c}`);
+                    } else {
+                        results.push(`❌ ${stock.name} (${stock.symbol}): ${data.message || '无数据'}`);
+                    }
+                } catch (error) {
+                    results.push(`❌ ${stock.name} (${stock.symbol}): ${error.message}`);
+                }
+            }
+
+            resultDiv.innerHTML = `
+                <p style="color: #4CAF50;">测试完成：</p>
+                <pre>${results.join('\n')}</pre>
+            `;
+        }
+    </script>
+</body>
+</html>

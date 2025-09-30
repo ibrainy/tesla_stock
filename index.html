@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股票实时价格 - 车机大屏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">实时股价</h1>
+            <div class="last-update" id="lastUpdate">最后更新: --</div>
+        </header>
+        
+        <main class="stocks-grid">
+            <div class="stock-card tesla" id="tesla">
+                <div class="stock-header">
+                    <div class="stock-logo">⚡</div>
+                    <div class="stock-info">
+                        <h2 class="stock-name">特斯拉</h2>
+                        <div class="stock-symbol">TSLA</div>
+                    </div>
+                </div>
+                <div class="stock-price">
+                    <div class="current-price" id="tesla-price">--</div>
+                    <div class="price-change" id="tesla-change">--</div>
+                </div>
+            </div>
+            
+            <div class="stock-card apple" id="apple">
+                <div class="stock-header">
+                    <div class="stock-logo">🍎</div>
+                    <div class="stock-info">
+                        <h2 class="stock-name">苹果</h2>
+                        <div class="stock-symbol">AAPL</div>
+                    </div>
+                </div>
+                <div class="stock-price">
+                    <div class="current-price" id="apple-price">--</div>
+                    <div class="price-change" id="apple-change">--</div>
+                </div>
+            </div>
+            
+            <div class="stock-card microsoft" id="microsoft">
+                <div class="stock-header">
+                    <div class="stock-logo">🪟</div>
+                    <div class="stock-info">
+                        <h2 class="stock-name">微软</h2>
+                        <div class="stock-symbol">MSFT</div>
+                    </div>
+                </div>
+                <div class="stock-price">
+                    <div class="current-price" id="microsoft-price">--</div>
+                    <div class="price-change" id="microsoft-change">--</div>
+                </div>
+            </div>
+            
+            <div class="stock-card nvidia" id="nvidia">
+                <div class="stock-header">
+                    <div class="stock-logo">🎮</div>
+                    <div class="stock-info">
+                        <h2 class="stock-name">英伟达</h2>
+                        <div class="stock-symbol">NVDA</div>
+                    </div>
+                </div>
+                <div class="stock-price">
+                    <div class="current-price" id="nvidia-price">--</div>
+                    <div class="price-change" id="nvidia-change">--</div>
+                </div>
+            </div>
+            
+            <div class="stock-card google" id="google">
+                <div class="stock-header">
+                    <div class="stock-logo">🔍</div>
+                    <div class="stock-info">
+                        <h2 class="stock-name">谷歌</h2>
+                        <div class="stock-symbol">GOOGL</div>
+                    </div>
+                </div>
+                <div class="stock-price">
+                    <div class="current-price" id="google-price">--</div>
+                    <div class="price-change" id="google-change">--</div>
+                </div>
+            </div>
+            
+            <div class="stock-card amazon" id="amazon">
+                <div class="stock-header">
+                    <div class="stock-logo">📦</div>
+                    <div class="stock-info">
+                        <h2 class="stock-name">亚马逊</h2>
+                        <div class="stock-symbol">AMZN</div>
+                    </div>
+                </div>
+                <div class="stock-price">
+                    <div class="current-price" id="amazon-price">--</div>
+                    <div class="price-change" id="amazon-change">--</div>
+                </div>
+            </div>
+            
+            <div class="stock-card meta" id="meta">
+                <div class="stock-header">
+                    <div class="stock-logo">📘</div>
+                    <div class="stock-info">
+                        <h2 class="stock-name">META</h2>
+                        <div class="stock-symbol">META</div>
+                    </div>
+                </div>
+                <div class="stock-price">
+                    <div class="current-price" id="meta-price">--</div>
+                    <div class="price-change" id="meta-change">--</div>
+                </div>
+            </div>
+            
+            <div class="stock-card qqq" id="qqq">
+                <div class="stock-header">
+                    <div class="stock-logo">📈</div>
+                    <div class="stock-info">
+                        <h2 class="stock-name">QQQ</h2>
+                        <div class="stock-symbol">QQQ</div>
+                    </div>
+                </div>
+                <div class="stock-price">
+                    <div class="current-price" id="qqq-price">--</div>
+                    <div class="price-change" id="qqq-change">--</div>
+                </div>
+            </div>
+            
+            <div class="stock-card berkshire" id="berkshire">
+                <div class="stock-header">
+                    <div class="stock-logo">💰</div>
+                    <div class="stock-info">
+                        <h2 class="stock-name">伯克希尔</h2>
+                        <div class="stock-symbol">BRK.B</div>
+                    </div>
+                </div>
+                <div class="stock-price">
+                    <div class="current-price" id="berkshire-price">--</div>
+                    <div class="price-change" id="berkshire-change">--</div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-dot"></span>
+                <span class="status-text">连接中...</span>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

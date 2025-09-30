@@ -1,0 +1,549 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 头部样式 */
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #ffffff, #a0a0a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.last-update {
+    font-size: 1.2rem;
+    color: #888;
+    font-weight: 300;
+}
+
+/* 股票网格布局 */
+.stocks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    flex: 1;
+    align-items: center;
+}
+
+/* 股票卡片样式 */
+.stock-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+    height: 100%;
+}
+
+.stock-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #333, #666);
+    transition: all 0.3s ease;
+}
+
+.stock-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* 特斯拉卡片 */
+.tesla::before {
+    background: linear-gradient(90deg, #ff6b35, #ff8c42);
+}
+
+.tesla:hover::before {
+    background: linear-gradient(90deg, #ff8c42, #ff6b35);
+}
+
+/* 苹果卡片 */
+.apple::before {
+    background: linear-gradient(90deg, #007aff, #5ac8fa);
+}
+
+.apple:hover::before {
+    background: linear-gradient(90deg, #5ac8fa, #007aff);
+}
+
+/* 微软卡片 */
+.microsoft::before {
+    background: linear-gradient(90deg, #00a4ef, #0078d4);
+}
+
+.microsoft:hover::before {
+    background: linear-gradient(90deg, #0078d4, #00a4ef);
+}
+
+/* 英伟达卡片 */
+.nvidia::before {
+    background: linear-gradient(90deg, #76b900, #4a9b00);
+}
+
+.nvidia:hover::before {
+    background: linear-gradient(90deg, #4a9b00, #76b900);
+}
+
+/* 谷歌卡片 */
+.google::before {
+    background: linear-gradient(90deg, #4285f4, #34a853);
+}
+
+.google:hover::before {
+    background: linear-gradient(90deg, #34a853, #4285f4);
+}
+
+/* 亚马逊卡片 */
+.amazon::before {
+    background: linear-gradient(90deg, #ff9900, #ff6600);
+}
+
+.amazon:hover::before {
+    background: linear-gradient(90deg, #ff6600, #ff9900);
+}
+
+/* META卡片 */
+.meta::before {
+    background: linear-gradient(90deg, #1877f2, #42a5f5);
+}
+
+.meta:hover::before {
+    background: linear-gradient(90deg, #42a5f5, #1877f2);
+}
+
+/* QQQ卡片 */
+.qqq::before {
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+}
+
+.qqq:hover::before {
+    background: linear-gradient(90deg, #8b5cf6, #6366f1);
+}
+
+/* 伯克希尔-B卡片 */
+.berkshire::before {
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.berkshire:hover::before {
+    background: linear-gradient(90deg, #d97706, #f59e0b);
+}
+
+/* 股票头部 */
+.stock-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.stock-logo {
+    font-size: 3rem;
+    margin-right: 1.5rem;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.stock-info {
+    flex: 1;
+    min-width: 0;
+    margin-right: 1rem;
+}
+
+.stock-name {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+    height: 2.8rem;
+    display: flex;
+    align-items: center;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stock-symbol {
+    font-size: 1.1rem;
+    color: #aaa;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+}
+
+/* 股价显示 */
+.stock-price {
+    text-align: right;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    padding-left: 1rem;
+}
+
+.current-price {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+    word-break: keep-all;
+    overflow: visible;
+    white-space: nowrap;
+}
+
+.price-change {
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+/* 涨跌颜色 */
+.price-up {
+    color: #ff4444;
+}
+
+.price-down {
+    color: #44ff44;
+}
+
+.price-neutral {
+    color: #888;
+}
+
+/* 涨跌箭头 */
+.price-change::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.price-up::before {
+    border-bottom: 12px solid #ff4444;
+}
+
+.price-down::before {
+    border-top: 12px solid #44ff44;
+}
+
+.price-neutral::before {
+    border-left: 6px solid #888;
+    border-right: 6px solid #888;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    height: 6px;
+}
+
+/* 底部状态栏 */
+.footer {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff4444;
+    animation: pulse 2s infinite;
+}
+
+.status-dot.connected {
+    background: #44ff44;
+    animation: none;
+}
+
+.status-dot.error {
+    background: #ff4444;
+    animation: none;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.status-text {
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+/* 响应式设计 - 车机大屏优化 */
+@media (min-width: 1920px) {
+    .container {
+        padding: 3rem;
+    }
+    
+    .title {
+        font-size: 4.5rem;
+    }
+    
+    .stocks-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+    
+    .stock-card {
+        padding: 2.5rem;
+    }
+    
+    .stock-name {
+        font-size: 2.2rem;
+        height: 2.8rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .current-price {
+        font-size: 3.5rem;
+        word-break: keep-all;
+        overflow: visible;
+        white-space: nowrap;
+    }
+    
+    .price-change {
+        font-size: 1.4rem;
+    }
+}
+
+/* 超宽屏优化 - 4K及更高分辨率 */
+@media (min-width: 2560px) {
+    .container {
+        padding: 4rem;
+    }
+    
+    .title {
+        font-size: 5.5rem;
+    }
+    
+    .stocks-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
+    }
+    
+    .stock-card {
+        padding: 3rem;
+    }
+    
+    .stock-name {
+        font-size: 2.8rem;
+        height: 3.5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .current-price {
+        font-size: 4.5rem;
+        word-break: keep-all;
+        overflow: visible;
+        white-space: nowrap;
+    }
+    
+    .price-change {
+        font-size: 1.8rem;
+    }
+    
+    .stock-logo {
+        font-size: 3.5rem;
+    }
+}
+
+/* 中等屏幕 - 平板横屏 */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .stocks-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .stock-card {
+        padding: 2rem;
+    }
+    
+    .stock-name {
+        font-size: 2rem;
+        height: 2.5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .current-price {
+        font-size: 3rem;
+        word-break: keep-all;
+        overflow: visible;
+        white-space: nowrap;
+    }
+}
+
+/* 小屏幕优化 - 一行显示两个股票 */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .stocks-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .stock-card {
+        padding: 1rem;
+    }
+    
+    .stock-name {
+        font-size: 1.4rem;
+        height: 1.8rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .stock-symbol {
+        font-size: 0.9rem;
+    }
+    
+    .current-price {
+        font-size: 2rem;
+        word-break: keep-all;
+        overflow: visible;
+        white-space: nowrap;
+    }
+    
+    .price-change {
+        font-size: 1rem;
+    }
+    
+    .stock-logo {
+        font-size: 2rem;
+    }
+}
+
+/* 超小屏幕 - 手机竖屏 */
+@media (max-width: 480px) {
+    .stocks-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .stock-card {
+        padding: 1.2rem;
+    }
+    
+    .stock-name {
+        font-size: 1.6rem;
+        height: 2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .current-price {
+        font-size: 2.2rem;
+        word-break: keep-all;
+        overflow: visible;
+        white-space: nowrap;
+    }
+}
+
+/* 加载动画 */
+.loading {
+    opacity: 0.6;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200px 0; }
+    100% { background-position: calc(200px + 100%) 0; }
+}
+
+/* 错误状态 */
+.error-state {
+    opacity: 0.5;
+    filter: grayscale(50%);
+}
+
+/* 缓存数据状态 - 仅保留文本标识 */
+.cached-data {
+    /* 不添加任何特殊样式，只通过文本标识区分 */
+}
+
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
